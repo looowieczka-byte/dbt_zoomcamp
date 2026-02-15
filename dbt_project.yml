@@ -6,6 +6,9 @@ name: 'dbt_zoomcamp'
 version: '1.0.0'
 config-version: 2
 
+# Require a specific dbt version for reproducibility
+require-dbt-version: [">=1.7.0", "<2.0.0"]
+
 # This setting configures which "profile" dbt uses for this project.
 profile: 'dbt_zoomcamp'
 
@@ -37,6 +40,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   dbt_zoomcamp:
-    # Applies to all files under models/example/
-    example:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: table
+    marts:
       +materialized: table
